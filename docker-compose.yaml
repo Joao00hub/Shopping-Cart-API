@@ -1,0 +1,15 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    ports:
+      - 8080:5432
+    volumes:
+      - /postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: shopping-cart
+
+volumes:
+  db-volume:
