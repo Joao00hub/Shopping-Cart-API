@@ -5,4 +5,4 @@ Shopping Cart API
  
 
 
- <img align="center"  height="100" width="400" src="https://img2.gratispng.com/20180712/ubw/kisspng-node-js-javascript-computer-icons-nodes-5b47e105a8f144.144832551531437317692.jpg">
+ <img align="center"  height="100" width="400" src="https://w7.pngwing.com/pngs/872/442/png-transparent-node-js-javascript-react-firebase-icon-angle-text-trademark.png">
