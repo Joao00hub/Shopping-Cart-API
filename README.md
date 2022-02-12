@@ -5,4 +5,4 @@ Shopping Cart API
  
 
 
- <img align="center"  height="100" width="400" src="https://w7.pngwing.com/pngs/872/442/png-transparent-node-js-javascript-react-firebase-icon-angle-text-trademark.png">
+ <img align="center"  height="100" width="400" src="https://www.clipartmax.com/png/middle/89-894960_js-discord-bot-logo-node-js-and-react-js.png">
