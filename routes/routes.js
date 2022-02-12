@@ -1,5 +1,4 @@
-const express = require('express');
-const UserController = require('../src/controllers/UserController');
+const express = require('express')
 const CartController = require('../src/controllers/CartsController');
 const ProductController = require('../src/controllers/ProductsController');
 const CouponCartsControler = require('../src/controllers/CouponCartController');
@@ -12,7 +11,6 @@ routes.get('/',(req, res) => {
     return res.json({hello: 'world'});
 })
 
-routes.post('/users', UserController.storeUser);
 routes.post('/carts/:apiKey', CartController.storeCart);
 routes.post('/product', ProductController.storeProduct);
 routes.post('/coupon', CouponControler.storeCoupon);
@@ -23,6 +21,7 @@ routes.get('/carts/:id_cart/products', CartsProductsController.getProductsOfCart
 routes.get('/carts/:id_cart/amount', CartsProductsController.getShoppingAmount);
 
 routes.put('/carts/:id_cart', CartsProductsController.cleanCart);
+routes.put('/carts/:id_cart/products/:id_product', CartsProductsController.removeProduct);
 
 module.exports = routes;
 

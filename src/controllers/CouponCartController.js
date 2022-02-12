@@ -30,7 +30,7 @@ module.exports = {
             return res.status(400).json({ error: 'cart or coupon not found' });
         }else{
             const couponCart = await CouponCart.create({ id_cart, id_coupon });
-            return res.status(200).json(couponCart);
+            return res.status(200).json({success: 'coupon vinculated' ,couponCart});
         }      
     }
 };

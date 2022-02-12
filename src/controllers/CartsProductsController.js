@@ -1,6 +1,7 @@
 const CartProduct = require('../models/Carts_products');
 const Cart = require('../models/Carts');
 const Product = require('../models/Products');
+const { Op } = require("sequelize");
 
 module.exports = {
     async getProductsOfCart(req, res) {
@@ -12,14 +13,20 @@ module.exports = {
             },
             include: {
                 association: 'products', attributes: ['name', 'value'], through: {
-                    attributes: ['id_cart', 'quantity_products']
-                }
+                    attributes: ['id_cart', 'quantity_products'],
+                    where: {
+                        product_removed: {
+                            [Op.not]: 'Y'
+                        }
+                    },
+                },
+
             }
         }).then(function (result) {
             if (result) {
                 return res.json(result.products);
             } else {
-                return res.json({ error: "not found" });
+                return res.json({ error: "not found any product" });
             }
         })
     },
@@ -36,7 +43,13 @@ module.exports = {
                 {
                     association: 'products',
                     attributes: ['value'],
-                    through: { attributes: ['quantity_products'] }
+                    through: {
+                        attributes: ['quantity_products'], where: {
+                            product_removed: {
+                                [Op.not]: 'Y'
+                            }
+                        },
+                    },
                 },
                 {
                     association: 'coupons',
@@ -61,7 +74,7 @@ module.exports = {
 
                 const totalDiscountBrl = formatCurrent(totalDiscount);
 
-                return res.json({ subtotals: totalBrl, total: totalDiscountBrl});
+                return res.json({ subtotals: totalBrl, total: totalDiscountBrl });
             } else {
                 return res.json({ error: "not found" });
             }
@@ -108,7 +121,7 @@ module.exports = {
                             id_product: id_product
                         }
                     });
-                    return res.status(200).json({ success: "product save" });
+                    return res.status(200).json({ success: "product recovered" });
                 } else {
                     await CartProduct.create({ id_cart, id_product, quantity_products, product_removed: "N" });
                     return res.status(201).json({ success: "product save" });
@@ -134,12 +147,32 @@ module.exports = {
             });
             return res.status(200).json({ success: "Cart clean" });
         }
-    }    
+    },
+
+    async removeProduct(req, res) {
+        const { id_cart, id_product } = req.params;
+
+        const cart = await CartProduct.findByPk(id_cart);
+
+        if (!cart) {
+            return res.status(400).json({ error: 'cart or product not found' });
+        } else {
+            await CartProduct.update({
+                product_removed: 'Y'
+            }, {
+                where: {
+                    id_cart: id_cart,
+                    id_product: id_product
+                }
+            });
+            return res.status(200).json({ success: "Product clean" });
+        }
+    }
 };
 
-function formatCurrent(value){
-    return Number(value).toLocaleString('pt-BR', {  
+function formatCurrent(value) {
+    return Number(value).toLocaleString('pt-BR', {
         style: 'currency',
         currency: 'BRL'
-    });   
+    });
 }

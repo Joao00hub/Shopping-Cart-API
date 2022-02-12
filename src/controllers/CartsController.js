@@ -8,7 +8,7 @@ module.exports = {
             return res.status(400).json({ error: 'apiKey not found' });
         }else{
             const cart = await Cart.create(apiKey);
-            return res.status(200).json({success: 'cart created'});
+            return res.status(200).json({success: 'cart created', cart});
         }
     }
 };
