@@ -5,4 +5,4 @@ Shopping Cart API
  
 
 
- <img align="center"  height="30" width="40" src="https://w7.pngwing.com/pngs/777/698/png-transparent-node-js-javascript-software-developer-npm-github-angle-text-logo.png">
+ <img align="center"  height="100" width="400" src="https://img2.gratispng.com/20180712/ubw/kisspng-node-js-javascript-computer-icons-nodes-5b47e105a8f144.144832551531437317692.jpg">
